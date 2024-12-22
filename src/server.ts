@@ -1,5 +1,5 @@
 import fastify from 'fastify'
-import { routes } from './router/main'
+import { routes } from './router/main.js'
 import cors from '@fastify/cors'
 
 export const app = fastify()
@@ -7,9 +7,11 @@ export const app = fastify()
 app.register(routes)
 app.register(cors, {})
 
-app.listen({ port: 3000 }, (error, address) => {
+const port = Number.parseInt(process.env.PORT || '3000')
+
+app.listen({ port: port }, (error, address) => {
   if (error) {
     console.log(error)
   }
-  console.log('Server running on port 3000')
+  console.log(`Server is running on ${address}`)
 })
